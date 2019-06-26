@@ -57,7 +57,6 @@ module.exports = {
           'html-loader'
         ]
       },
-
     ]
   }
 };
