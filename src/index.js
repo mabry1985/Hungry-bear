@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
 $(document).ready(function() {
-  console.log("hello world");
+  console.log("document ready");
   $('').submit(function(event) {
     event.preventDefault();
 
-
+    
   });
 });
