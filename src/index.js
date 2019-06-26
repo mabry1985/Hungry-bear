@@ -4,10 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 
 $(document).ready(function() {
-  console.log("document ready");
-  $('').submit(function(event) {
-    event.preventDefault();
+  $('button').click(function () {
+    $('body').append(`<p>blue button clicked</p>`);
 
-    
   });
 });
