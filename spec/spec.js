@@ -52,4 +52,10 @@ describe('HungryBear', function () {
     jasmine.clock().tick(120000);
     expect(fuzzy.sleepLevel).toEqual(120);
   });
+
+  it('should reset sleep level to 60 when sleep level is at 0 and bear is poked', function () {
+    jasmine.clock().tick(120000);
+    fuzzy.pokeBear();
+    expect(fuzzy.sleepLevel).toEqual(60);
+  });
 });

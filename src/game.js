@@ -27,6 +27,13 @@ export let bear = {
     this.setSleep();
   },
 
+  pokeBear: function () {
+    clearInterval(this.sleepyBear());
+    this.sleepLevel = 60;
+    this.setSleep();
+    return 'RAAWWWWRRRR!!!!';
+  },
+
   didYouGetEaten: function () {
     if (this.foodLevel > 0) {
       return false;
