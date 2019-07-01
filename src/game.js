@@ -1,12 +1,24 @@
 export let bear = {
-  foodLevel: 10,
+  foodLevel: 20,
   sleepLevel: 120,
+  moodLevel: 0,
   setHunger: function () {
     const hungerInterval = setInterval(() => {
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
         clearInterval(hungerInterval);
         return 'You got eaten!';
+      }
+
+      if (this.foodLevel === 25 || this.foodLevel === 50 || this.foodLevel === 75
+        || this.foodLevel === 100 || this.foodLevel === 125) {
+        this.bearPoop();
+      } else if (this.foodLevel === 150) {
+        this.bearPuke();
+      }
+
+      if (this.foodLevel === 10) {
+        this.bearMood();
       }
     }, 1000);
   },
@@ -18,6 +30,15 @@ export let bear = {
         clearInterval(sleepInterval);
         setTimeout(this.sleepyBear(), 30000);
         return "That's one sleepy bear.";
+      }
+    }, 1000);
+  },
+
+  bearMood: function () {
+    const moodInterval = setInterval(() => {
+      this.moodLevel++;
+      if (this.moodLevel === 120) {
+        return 'You got eaten.';
       }
     }, 1000);
   },
@@ -48,6 +69,14 @@ export let bear = {
       _this.foodLevel += amount;
       return `The bear ate the ${food}! Food level goes up ${amount}!`;
     };
+  },
+
+  bearPoop: function () {
+    return "That's one POOPY bear!!";
+  },
+
+  bearPuke: function () {
+    return 'BLAARRGGGHHHH!!!!!';
   },
 };
 

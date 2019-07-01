@@ -7,6 +7,7 @@ describe('HungryBear', function () {
     jasmine.clock().install();
     fuzzy.foodLevel = 10;
     fuzzy.sleepLevel = 120;
+    fuzzy.moodLevel = 0;
     fuzzy.name = 'Fuzzy';
     fuzzy.setHunger();
     fuzzy.setSleep();
@@ -58,4 +59,27 @@ describe('HungryBear', function () {
     fuzzy.pokeBear();
     expect(fuzzy.sleepLevel).toEqual(60);
   });
+
+});
+
+describe('Hungry bear mood', function () {
+  let fuzzy = bear;
+
+  beforeEach(function () {
+    jasmine.clock().install();
+    fuzzy.moodLevel = 0;
+    fuzzy.foodLevel = 11;
+  });
+
+  afterEach(function () {
+    jasmine.clock().uninstall();
+  });
+
+  it('it should start a mood counter when hunger gets too low', function () {
+
+    fuzzy.setHunger();
+    jasmine.clock().tick(121000);
+    expect(fuzzy.moodLevel).toEqual(120);
+  });
+
 });
