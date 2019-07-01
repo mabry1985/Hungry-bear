@@ -10,10 +10,9 @@ export let bear = {
         return 'You got eaten!';
       }
 
-      if (this.foodLevel === 25 || this.foodLevel === 50 || this.foodLevel === 75
-        || this.foodLevel === 100 || this.foodLevel === 125) {
+      if (this.foodLevel === 25 || this.foodLevel === 50 || this.foodLevel === 75) {
         this.bearPoop();
-      } else if (this.foodLevel === 150) {
+      } else if (this.foodLevel === 100) {
         this.bearPuke();
       }
 
@@ -76,6 +75,7 @@ export let bear = {
   },
 
   bearPuke: function () {
+    this.foodLevel = 20;
     return 'BLAARRGGGHHHH!!!!!';
   },
 };
