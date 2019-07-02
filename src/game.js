@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export let bear = {
-  foodLevel: 20,
+  foodLevel: 10,
   sleepLevel: 120,
   moodLevel: 0,
   setHunger: function () {
@@ -21,7 +21,7 @@ export let bear = {
         this.bearPuke();
       }
 
-      if (this.foodLevel === 10) {
+      if (this.foodLevel <= 10) {
         this.setMood();
       }
     }, 1000);
@@ -46,8 +46,8 @@ export let bear = {
   setMood: function () {
     const moodInterval = setInterval(() => {
       this.moodLevel++;
-      if (this.moodLevel === 120) {
-        return 'You got eaten!';
+      if (this.didYouGetEaten() == true) {
+        clearInterval(moodInterval);
       }
     }, 1000);
   },
@@ -66,10 +66,10 @@ export let bear = {
   },
 
   didYouGetEaten: function () {
-    if (this.foodLevel > 0) {
-      return false;
-    } else {
+    if (this.moodLevel >= 60 || this.foodLevel <= 0) {
       return true;
+    } else {
+      return false;
     }
   },
 
@@ -95,16 +95,19 @@ export let bear = {
 
   foodMeter() {
     $('#food').html('<meter id="food-meter" min="0" max="100" low="33" high="66" optimum="80" value="' + this.foodLevel + '"></meter>')
-    console.log(this.foodLevel);
+    console.log("======================");
+    console.log("food: " + this.foodLevel);
   },
 
   sleepMeter() {
     $('#sleep').html('<meter id="sleep-meter" min="0" max="120" low="33" high="66" optimum="80" value="' + this.sleepLevel + '"></meter>')
-    console.log(this.sleepLevel);
+    console.log("sleep: " + this.sleepLevel);
   },
 
   moodMeter() {
-    $('#mood').html('<meter id="mood-meter" min="0" max="100" low="33" high="66" optimum="80" value="' + this.moodLevel + '"></meter>')
+    $('#mood').html('<meter id="mood-meter" min="0" max="60" low="35" high="15" optimum="20" value="' + this.moodLevel + '"></meter>')
+    console.log("mood: " + this.moodLevel);
+    console.log(this.didYouGetEaten());
   },
 };
 
