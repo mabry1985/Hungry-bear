@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 export let bear = {
-  foodLevel: 10,
-  sleepLevel: 120,
+  foodLevel: 15,
+  sleepLevel: 10,
   moodLevel: 0,
   setHunger: function () {
     const hungerInterval = setInterval(() => {
@@ -36,6 +36,7 @@ export let bear = {
 
       if (this.sleepLevel <= 0) {
         clearInterval(sleepInterval);
+        $('#poke').show();
         setTimeout( () => {
           this.sleepyBear()
         }, 10000);
@@ -62,6 +63,8 @@ export let bear = {
     clearTimeout(this.sleepyBear());
     this.sleepLevel = 60;
     this.setSleep();
+    this.setMood();
+    $('#poke').hide();
     return 'RAAWWWWRRRR!!!!';
   },
 

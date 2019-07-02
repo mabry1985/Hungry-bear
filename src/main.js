@@ -8,7 +8,12 @@ $(document).ready(function () {
   let fuzzy = bear;
 
   $("#new-game").click(function(){
-    
+    this.foodLevel= 15,
+    this.sleepLevel= 10,
+    this.moodLevel= 0,
+    clearInterval(fuzzy.setHunger);
+    clearInterval(fuzzy.setSleep);
+    clearInterval(fuzzy.setMood);
     fuzzy.setHunger();
     fuzzy.setSleep();
   });
@@ -17,5 +22,8 @@ $(document).ready(function () {
     fuzzy.eatBerry();
   })
 
+  $("#poke").click(function() {
+    fuzzy.pokeBear();
+  })
 
 });
