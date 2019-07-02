@@ -8,6 +8,7 @@ $(document).ready(function () {
   let fuzzy = bear;
 
   $("#new-game").click(function(){
+    
     fuzzy.setHunger();
     fuzzy.setSleep();
   });

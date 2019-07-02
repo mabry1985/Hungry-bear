@@ -12,12 +12,12 @@ export let bear = {
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
         clearInterval(hungerInterval);
-        return 'You got eaten!';
+        console.log( 'You got eaten!');
       }
 
       if (this.foodLevel === 25 || this.foodLevel === 50 || this.foodLevel === 75) {
         this.bearPoop();
-      } else if (this.foodLevel === 100) {
+      } else if (this.foodLevel >= 100) {
         this.bearPuke();
       }
 
@@ -32,12 +32,11 @@ export let bear = {
       this.sleepLevel--;
       if (this.didYouGetEaten() == true) {
         clearInterval(sleepInterval);
-        return 'You got eaten!';
       }
 
       if (this.sleepLevel <= 0) {
         clearInterval(sleepInterval);
-        setTimeout(this.sleepyBear(), 30000);
+        setTimeout(this.sleepyBear(), 10000);
         console.log("That's one sleepy bear.");
       }
     }, 1000);
@@ -82,12 +81,12 @@ export let bear = {
   },
 
   bearPoop: function () {
-    return "That's one POOPY bear!!";
+    console.log("That's one POOPY bear!!");
   },
 
   bearPuke: function () {
     this.foodLevel = 20;
-    return 'BLAARRGGGHHHH!!!!!';
+    console.log ('"BLAARRGGGHHHH!!!!!", Oh no, he threw up!');
   },
   //==============================================================
   //Vitals Meters ================================================
