@@ -1,9 +1,14 @@
+import $ from 'jquery';
+
 export let bear = {
   foodLevel: 20,
   sleepLevel: 120,
   moodLevel: 0,
   setHunger: function () {
     const hungerInterval = setInterval(() => {
+      this.foodMeter();
+      this.sleepMeter();
+      this.moodMeter();
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
         clearInterval(hungerInterval);
@@ -17,7 +22,7 @@ export let bear = {
       }
 
       if (this.foodLevel === 10) {
-        this.bearMood();
+        this.setMood();
       }
     }, 1000);
   },
@@ -25,19 +30,24 @@ export let bear = {
   setSleep: function () {
     const sleepInterval = setInterval(() => {
       this.sleepLevel--;
+      if (this.didYouGetEaten() == true) {
+        clearInterval(sleepInterval);
+        return 'You got eaten!';
+      }
+
       if (this.sleepLevel <= 0) {
         clearInterval(sleepInterval);
         setTimeout(this.sleepyBear(), 30000);
-        return "That's one sleepy bear.";
+        console.log("That's one sleepy bear.");
       }
     }, 1000);
   },
 
-  bearMood: function () {
+  setMood: function () {
     const moodInterval = setInterval(() => {
       this.moodLevel++;
       if (this.moodLevel === 120) {
-        return 'You got eaten.';
+        return 'You got eaten!';
       }
     }, 1000);
   },
@@ -48,7 +58,7 @@ export let bear = {
   },
 
   pokeBear: function () {
-    clearInterval(this.sleepyBear());
+    clearTimeout(this.sleepyBear());
     this.sleepLevel = 60;
     this.setSleep();
     return 'RAAWWWWRRRR!!!!';
@@ -62,11 +72,12 @@ export let bear = {
     }
   },
 
-  feed: function (amount) {
+  feed: function (foodAmount, sleepAmount) {
     let _this = this;
     return function (food) {
-      _this.foodLevel += amount;
-      return `The bear ate the ${food}! Food level goes up ${amount}!`;
+      _this.foodLevel += foodAmount;
+      _this.sleepLevel += sleepAmount;
+      return `The bear ate the ${food}!`;
     };
   },
 
@@ -78,12 +89,26 @@ export let bear = {
     this.foodLevel = 20;
     return 'BLAARRGGGHHHH!!!!!';
   },
+  //==============================================================
+  //Vitals Meters ================================================
+
+  foodMeter() {
+    $('#food').html('<meter id="food-meter" min="0" max="100" low="33" high="66" optimum="80" value="' + this.foodLevel + '"></meter>')
+    console.log(this.foodLevel);
+  },
+
+  sleepMeter() {
+    $('#sleep').html('<meter id="sleep-meter" min="0" max="120" low="33" high="66" optimum="80" value="' + this.sleepLevel + '"></meter>')
+    console.log(this.sleepLevel);
+  },
+
+  moodMeter() {
+    $('#mood').html('<meter id="mood-meter" min="0" max="100" low="33" high="66" optimum="80" value="' + this.moodLevel + '"></meter>')
+  },
 };
 
-bear.eatSmall = bear.feed(5);
-bear.eatMedium = bear.feed(10);
-bear.eatLarge = bear.feed(15);
-bear.eatYuck = bear.feed(-10);
-bear.eatPowerUp = bear.feed(50);
-bear.eatSpecialBonus = bear.feed(100);
+bear.eatBerry = bear.feed(5, -5);
+bear.eatPizza = bear.feed(10, -10);
+bear.eatCake = bear.feed(15, -20);
+bear.eatYuck = bear.feed(-10, -50);
 bear.eatWeirdThing = bear.feed(Math.floor((Math.random() * 20) + 1));

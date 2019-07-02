@@ -39,8 +39,8 @@ describe('HungryBear', function () {
   });
 
   it('should return that the bear ate blueberries and the food level should go up 5', function () {
-    expect(fuzzy.eatSmall('blueberries')).toEqual
-    ('The bear ate the blueberries! Food level goes up 5!');
+    expect(fuzzy.eatBerry('blueberries')).toEqual
+    ('The bear ate the blueberries!');
     expect(fuzzy.foodLevel).toEqual(15);
   });
 
@@ -50,7 +50,8 @@ describe('HungryBear', function () {
   });
 
   it('should reset sleep level to 120 when sleep level is at 0', function () {
-    jasmine.clock().tick(120000);
+    fuzzy.sleepLevel = 0;
+    jasmine.clock().tick(1001);
     expect(fuzzy.sleepLevel).toEqual(120);
   });
 
