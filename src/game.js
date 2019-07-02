@@ -36,8 +36,9 @@ export let bear = {
 
       if (this.sleepLevel <= 0) {
         clearInterval(sleepInterval);
-        setTimeout(this.sleepyBear(), 10000);
-        console.log("That's one sleepy bear.");
+        setTimeout( () => {
+          this.sleepyBear()
+        }, 10000);
       }
     }, 1000);
   },
@@ -54,6 +55,7 @@ export let bear = {
   sleepyBear: function () {
     this.sleepLevel = 120;
     this.setSleep();
+    console.log("That's one sleepy bear.");
   },
 
   pokeBear: function () {

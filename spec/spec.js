@@ -79,7 +79,7 @@ describe('Hungry bear mood', function () {
   it('it should start a mood counter when hunger gets too low', function () {
 
     fuzzy.setHunger();
-    jasmine.clock().tick(121000);
+    jasmine.clock().tick(151000);
     expect(fuzzy.moodLevel).toEqual(120);
   });
 
