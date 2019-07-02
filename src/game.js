@@ -2,16 +2,18 @@ import $ from 'jquery';
 
 export let bear = {
   foodLevel: 15,
-  sleepLevel: 10,
+  sleepLevel: 120,
   moodLevel: 0,
   setHunger: function () {
-    const hungerInterval = setInterval(() => {
+      this.hungerInterval = setInterval(() => {
       this.foodMeter();
       this.sleepMeter();
       this.moodMeter();
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
-        clearInterval(hungerInterval);
+        clearInterval(this.hungerInterval);
+        clearInterval(this.sleepInterval);
+        clearInterval(this.moodInterval);
         console.log( 'You got eaten!');
       }
 
@@ -28,14 +30,10 @@ export let bear = {
   },
 
   setSleep: function () {
-    const sleepInterval = setInterval(() => {
+    this.sleepInterval = setInterval(() => {
       this.sleepLevel--;
-      if (this.didYouGetEaten() == true) {
-        clearInterval(sleepInterval);
-      }
-
       if (this.sleepLevel <= 0) {
-        clearInterval(sleepInterval);
+        clearInterval(this.sleepInterval);
         $('#poke').show();
         setTimeout( () => {
           this.sleepyBear()
@@ -45,11 +43,8 @@ export let bear = {
   },
 
   setMood: function () {
-    const moodInterval = setInterval(() => {
+    this.moodInterval = setInterval(() => {
       this.moodLevel++;
-      if (this.didYouGetEaten() == true) {
-        clearInterval(moodInterval);
-      }
     }, 1000);
   },
 
